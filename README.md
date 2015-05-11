@@ -1,0 +1,1 @@
+Scripts (Perl and batch) for FFMPEG and FFPROBE analysis of MPEG files in this and sub-directories. Ewan created some sample MPEG captures (software based from Winnov and Osprey capture cards and hardware based from the Optibase capture card). Also got a "broken" video from Doug that doesn't play back properly (fixed via FFMPEG container change).
