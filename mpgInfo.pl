@@ -36,7 +36,7 @@ foreach my $theFile (@content_vid) {
     #say $fh_vidLog "$filecount: $theFile";
     system("echo. >>$probeLog");
     system("echo.$filecount. MPEGFileFound >>$probeLog");
-    #system("echo.$fullFileName >>$probeLog");
+    system("echo.$fullFileName >>$probeLog");
     #system("ffprobe -show_format $fullFileName >> $probeLog 2>&1");
     system("ffprobe -show_frames -pretty $fullFileName >> $probeLog 2>&1");
     system("echo.FFMPEG to null error log >>$probeLog");
