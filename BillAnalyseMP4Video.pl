@@ -40,10 +40,10 @@ say $fh_out "filecount, framecount, media_type, pkt_pts, pkt_pts_time, pkt_dts, 
 
 # find .mp4 files recursively from this directory
 my $filecount=0;
-find( \&mp4Wanted, '.');
-foreach my $mp4Name (@content) {
+find( \&mpgWanted, '.');
+foreach my $mpgName (@content) {
 	# file path and name
-	($name,$dir,$ext) = fileparse($mp4Name,'\..*');
+	($name,$dir,$ext) = fileparse($mpgName,'\..*');
 	$filePath = cwd();
 	$fileSubProject = substr $dir, 2;
 	$fileDataset = "$filePath/$fileSubProject";
@@ -52,7 +52,7 @@ foreach my $mp4Name (@content) {
 	$filecount ++;
     
 	#Frame sequence?
-	@probeArr = `ffprobe -show_frames -i $mp4Name`;
+	@probeArr = `ffprobe -show_frames -i $mpgName`;
 	my $framecount=0;
 	foreach my $i (@probeArr){
 		chomp $i;
@@ -113,7 +113,6 @@ foreach my $mp4Name (@content) {
 	# write to output file
 	#say $fh_out "$pkt_pts, $pkt_pts_time, $pkt_dts, $pkt_dts_time, $pict_type";
 	say "$filePathName ... done";
-	
     
 }
 close $fh_out;
@@ -121,9 +120,12 @@ close $fout;
 exit;
 
 # subroutine to recursively find all files with ".mp4" extension
-sub mp4Wanted {
-    if ($File::Find::name =~ /.mp4/){
-        push @content, $File::Find::name;
+sub mpgWanted {
+    if ($File::Find::name =~ /.mpg/){
+        my  ($ext) = $File::Find::name =~ /(\.[^.]+)$/;
+        if ($ext eq ".mpg") {
+            push @content, $File::Find::name;
+        }
     }
     return;
 }
